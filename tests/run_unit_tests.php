@@ -7,10 +7,22 @@ declare(strict_types=1);
  * Runs all unit test assertions without requiring Composer or a live MySQL database.
  */
 
+// If vendor PHPUnit is available, delegate to it for official testdox reporting
+$vendorPhpunit = dirname(__DIR__) . '/vendor/bin/phpunit';
+if (PHP_OS_FAMILY === 'Windows' && file_exists($vendorPhpunit . '.bat')) {
+    $vendorPhpunit .= '.bat';
+}
+
+if (file_exists($vendorPhpunit)) {
+    echo "Composer PHPUnit detected. Delegating to official PHPUnit test runner...\n\n";
+    passthru(escapeshellcmd($vendorPhpunit) . ' --testdox', $exitCode);
+    exit($exitCode);
+}
+
 require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/TestCase.php';
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCounter;
 
 echo "\n";
 echo "========================================================================\n";
@@ -46,8 +58,8 @@ foreach ($testClasses as $class) {
     foreach ($methods as $method) {
         if (str_starts_with($method, 'test')) {
             $totalMethods++;
-            $initPass = TestCase::$passCount;
-            $initFail = TestCase::$failCount;
+            $initPass = TestCounter::$passCount;
+            $initFail = TestCounter::$failCount;
 
             $refMethod = new \ReflectionMethod($instance, 'setUp');
             $refMethod->setAccessible(true);
@@ -59,7 +71,7 @@ foreach ($testClasses as $class) {
             $refTear->setAccessible(true);
             $refTear->invoke($instance);
 
-            $methodPassed = (TestCase::$failCount === $initFail);
+            $methodPassed = (TestCounter::$failCount === $initFail);
             $status = $methodPassed ? "[PASS]" : "[FAIL]";
             echo "  $status $method\n";
         }
@@ -69,14 +81,14 @@ foreach ($testClasses as $class) {
 
 echo "------------------------------------------------------------------------\n";
 echo "Summary: $totalClasses Test Classes, $totalMethods Test Methods Executed\n";
-echo "Assertions Passed : " . TestCase::$passCount . "\n";
-echo "Assertions Failed : " . TestCase::$failCount . "\n";
+echo "Assertions Passed : " . TestCounter::$passCount . "\n";
+echo "Assertions Failed : " . TestCounter::$failCount . "\n";
 echo "------------------------------------------------------------------------\n";
 
-if (TestCase::$failCount === 0) {
+if (TestCounter::$failCount === 0) {
     echo "Result: SUCCESS (100% Tests Passed - Ready for CI/CD Deployment)\n\n";
     exit(0);
 } else {
-    echo "Result: FAILURE (" . TestCase::$failCount . " Assertions Failed)\n\n";
+    echo "Result: FAILURE (" . TestCounter::$failCount . " Assertions Failed)\n\n";
     exit(1);
 }

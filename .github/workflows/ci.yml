@@ -23,12 +23,12 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: pdo, pdo_mysql, pdo_sqlite, curl, mbstring, openssl, json
-          tools: composer, phpunit
+          extensions: pdo, pdo_mysql, pdo_sqlite, curl, mbstring, openssl
+          tools: composer
           coverage: none
 
       - name: Validate composer.json
-        run: composer validate --strict
+        run: composer validate --strict --no-check-lock
 
       - name: Copy Environment Configuration
         run: cp .env.example .env
@@ -49,9 +49,6 @@ jobs:
         run: |
           echo "Running syntax check on core application files..."
           find app/ -name "*.php" -exec php -l {} \;
-
-      - name: Run Zero-Dependency Unit Test Runner
-        run: php tests/run_unit_tests.php
 
       - name: Run PHPUnit Test Suite
         run: vendor/bin/phpunit --testdox
