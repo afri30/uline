@@ -36,13 +36,14 @@ Dokumen dan kode sumber ini disusun untuk memenuhi persyaratan nilai tugas akhir
 
 Dokumentasi tahapan pengembangan dan demonstrasi fungsionalitas sistem U-Line dapat disaksikan melalui tautan video berikut:
 
+* 🎬 **Video Kompilasi Final (Gabungan Progres 1 - 3):**  
+  [https://youtu.be/ic_aofQBV5M](https://youtu.be/ic_aofQBV5M)
 * 🎬 **Video Progres 1 (Analisis & Perancangan Arsitektur):**  
   [https://drive.google.com/file/d/1doCFdXaX40lYzF8CMHNhovWrh9YQZ9ze/view?usp=sharing](https://drive.google.com/file/d/1doCFdXaX40lYzF8CMHNhovWrh9YQZ9ze/view?usp=sharing)
 * 🎬 **Video Progres 2 (Implementasi MVC & Fitur Utama CBT):**  
   [https://drive.google.com/file/d/1KGW-T64dwXpaQnoA2pHwY_ltAicsn87d/view?usp=sharing](https://drive.google.com/file/d/1KGW-T64dwXpaQnoA2pHwY_ltAicsn87d/view?usp=sharing)
 * 🎬 **Video Final Demo (Demo Aplikasi, Proctoring & CI/CD Pipeline):**  
   [https://drive.google.com/file/d/19UwugOv0d1O1NjXbeTjslkjumZGmna7C/view?usp=sharing](https://drive.google.com/file/d/19UwugOv0d1O1NjXbeTjslkjumZGmna7C/view?usp=sharing)
-
 ---
 
 ## 🚀 Fitur Utama Sistem U-Line
