@@ -14,24 +14,22 @@
 ---
 
 ## 📌 Identitas Proyek Tugas Akhir / UAS
-
 Dokumen dan kode sumber ini disusun untuk memenuhi persyaratan nilai tugas akhir / UAS mata kuliah **Rekayasa Perangkat Lunak (TIKB2503021)**:
 
-* **Mata Kuliah:** Rekayasa Perangkat Lunak (TIKB2503021)
-* **Dosen Pengampu:** **Yudhistira Arie Wijaya, M.Kom., CDS.**
-* **Program Studi:** S1 Teknik Informatika
-* **Perguruan Tinggi:** **STMIK IKMI Cirebon**
-* **Tautan Repository GitHub:** [https://github.com/afri30/uline](https://github.com/afri30/uline)
-
-### 👥 Tim Pengembang (Kelompok):
-| No | Nama Mahasiswa | NIM | Peran / Kontribusi |
-| :---: | :--- | :---: | :--- |
-| 1 | **Rian Afriyansyah** *(Ketua)* | **41257154** | Full-Stack Architecture, AI Proctoring & Dual-Cam WebRTC |
-| 2 | **Rijal** | **41257155** | Database Modeling & Core Academic Module |
-| 3 | **Salsa Nabila** | **41257158** | UI/UX Design & Frontend CBT Exam Engine |
-| 4 | **Siti Masripatul Hawa** | **41257160** | WhatsApp Gateway & Notification Engine |
-| 5 | **Dede Kuswara** | **41257170** | Teacher Monitoring Dashboard & Result Analytics |
-| 6 | **Khaerul Umam** | **41257172** | Quality Assurance, Unit Testing & CI/CD Pipeline |
+- **Nama Mahasiswa:** Rian Afriyansyah
+- **NIM:** 41257154
+- **Kelompok / Anggota:** 
+  1. Rian Afriyansyah (41257154)
+  2. Rijal (41257155)
+  3. Salsa Nabila (41257158)
+  4. Siti Masripatul Hawa (41257160)
+  5. Dede Kuswara (41257170)
+  6. Khaerul Umam (41257172)
+- **Tema Topik Kelompok:** Sistem Ujian Online Berbasis Web dengan Pengawasan Kecerdasan Buatan (AI Proctoring)
+- **Program Studi:** S1 Teknik Informatika
+- **Perguruan Tinggi:** STMIK IKMI Cirebon
+- **Dosen Pengampu:** Yudhistira Arie Wijaya, M.Kom., CDS.
+- **Tautan Repository GitHub:** [https://github.com/afri30/uline](https://github.com/afri30/uline)
 
 ---
 
