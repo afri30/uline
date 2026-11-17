@@ -19,12 +19,11 @@ Dokumen dan kode sumber ini disusun untuk memenuhi persyaratan nilai tugas akhir
 - **Nama Mahasiswa:** Rian Afriyansyah
 - **NIM:** 41257154
 - **Kelompok / Anggota:** 
-  1. Rian Afriyansyah (41257154)
-  2. Rijal (41257155)
-  3. Salsa Nabila (41257158)
-  4. Siti Masripatul Hawa (41257160)
-  5. Dede Kuswara (41257170)
-  6. Khaerul Umam (41257172)
+  1. Rijal (41257155)
+  2. Salsa Nabila (41257158)
+  3. Siti Masripatul Hawa (41257160)
+  4. Dede Kuswara (41257170)
+  5. Khaerul Umam (41257172)
 - **Tema Topik Kelompok:** Sistem Ujian Online Berbasis Web dengan Pengawasan Kecerdasan Buatan (AI Proctoring)
 - **Program Studi:** S1 Teknik Informatika
 - **Perguruan Tinggi:** STMIK IKMI Cirebon
