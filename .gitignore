@@ -1,0 +1,55 @@
+# ==============================================================================
+# U-Line CBT & AI Proctoring System - Git Ignore Configuration
+# ==============================================================================
+
+# Environment & Credentials (SANGAT PENTING: JANGAN PERNAH DI-COMMIT)
+.env
+.env.backup
+.env.local
+
+# Storage: Unggahan kamera proctoring & tangkapan visual peserta
+storage/proctoring/*
+!storage/proctoring/.gitkeep
+storage/cameras/*
+!storage/cameras/.gitkeep
+storage/evidence/*
+!storage/evidence/.gitkeep
+storage/logs/*
+!storage/logs/.gitkeep
+storage/cache/*
+!storage/cache/.gitkeep
+storage/uploads/*
+!storage/uploads/.gitkeep
+
+# Cookie & Session files
+*.txt
+!requirements.txt
+!LICENSE.txt
+
+# Scratch & Temporary Testing Scripts
+scratch/
+tests/budi_cookie.txt
+tests/non_existent_cookie.txt
+
+# Local Agent & IDE Configuration
+.agents/
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Dependency directories
+vendor/
+composer.lock
+
+# Testing & Coverage cache
+.phpunit.cache/
+.phpunit.result.cache
+coverage/
+
+# OS specific files
+Thumbs.db
+Desktop.ini
+.DS_Store
+push_ke_github.bat
+

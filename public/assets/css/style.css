@@ -1,0 +1,230 @@
+/* ==========================================================================
+   AI Online Examination & Proctoring System - Modern Stylesheet
+   ========================================================================== */
+
+:root {
+    --app-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --sidebar-width: 260px;
+    --sidebar-collapsed-width: 70px;
+    --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+    --auth-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+}
+
+body {
+    font-family: var(--app-font);
+    color: #1e293b;
+    background-color: #f8fafc;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Typography Enhancements */
+.extra-small {
+    font-size: 0.75rem;
+}
+
+.tracking-wide {
+    letter-spacing: 0.05em;
+}
+
+.tracking-wider {
+    letter-spacing: 0.08em;
+}
+
+.tracking-tight {
+    letter-spacing: -0.025em;
+}
+
+/* Gradients */
+.bg-gradient-primary {
+    background: var(--primary-gradient) !important;
+}
+
+.bg-gradient-auth {
+    background: var(--auth-gradient) !important;
+}
+
+/* App Wrapper & Layout */
+.app-wrapper {
+    min-height: 100vh;
+    display: flex;
+}
+
+.main-wrapper {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8fafc;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: #0f172a !important;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1040;
+    min-height: 100vh;
+    flex-shrink: 0;
+}
+
+.sidebar-toggle-btn {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sidebar-toggle-btn:hover {
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+}
+
+/* Desktop Collapsed / Slide Out Sidebar */
+@media (min-width: 992px) {
+    html.sidebar-collapsed .sidebar,
+    body.sidebar-collapsed .sidebar {
+        margin-left: calc(-1 * var(--sidebar-width));
+    }
+
+    body.sidebar-collapsed #sidebarToggle {
+        background-color: #e0e7ff;
+        color: #4338ca;
+        border-color: #c7d2fe;
+    }
+}
+
+.brand-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.sidebar .nav-link {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.65rem 0.85rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar .nav-link.active {
+    color: #ffffff;
+    background: #4f46e5;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+}
+
+/* Navbar Top */
+.navbar-top {
+    height: 64px;
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+/* Avatar Utilities */
+.avatar-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.avatar-circle-sm {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.brand-avatar {
+    width: 60px;
+    height: 60px;
+}
+
+/* Stat Icons */
+.stat-icon {
+    width: 48px;
+    height: 48px;
+}
+
+/* Dashboard Hero */
+.dashboard-hero {
+    background: linear-gradient(135deg, #3730a3 0%, #4f46e5 50%, #6366f1 100%) !important;
+}
+
+/* Login Card */
+.card-auth {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Mobile Responsive Sidebar */
+@media (max-width: 991.98px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: -100%;
+        box-shadow: 0 0 35px rgba(0, 0, 0, 0.6);
+        z-index: 1055;
+    }
+    
+    .sidebar.show {
+        left: 0;
+    }
+
+    .sidebar-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(2px);
+        z-index: 1050;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    body.sidebar-mobile-open .sidebar-backdrop {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    body.sidebar-mobile-open {
+        overflow: hidden;
+    }
+}
+
+/* Role Selector Tabs on Login */
+.btn-role-tab {
+    color: #64748b;
+    border: none;
+    background: transparent;
+    transition: all 0.2s ease;
+    font-size: 0.8125rem;
+}
+
+.btn-role-tab:hover {
+    color: #1e293b;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.btn-role-tab.active {
+    color: #1e293b;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+

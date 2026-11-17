@@ -1,0 +1,13 @@
+    <!-- Bootstrap 5.3 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <!-- Base URL Injection for JS -->
+    <script>
+        window.APP_URL = '<?= base_url() ?>';
+        window.CSRF_TOKEN = '<?= csrf_token() ?>';
+    </script>
+
+    <!-- Custom App JS with Cache-Buster -->
+    <script src="<?= asset('js/app.js') ?>?v=<?= file_exists(dirname(dirname(dirname(__DIR__))) . '/public/assets/js/app.js') ? filemtime(dirname(dirname(dirname(__DIR__))) . '/public/assets/js/app.js') : time() ?>"></script>
+</body>
+</html>

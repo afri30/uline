@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>U-Line · Use Case Detail Peserta Didik &amp; Layanan AI</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #f5f5f5;
+      --color-ink: #2d3142;
+      --color-muted: #4f5d75;
+      --color-soft: #5a6580;
+      --color-rule: rgba(45, 49, 66, 0.12);
+      --color-accent: #bf4520;
+      --color-link: #2e5aa8;
+      --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-mono: 'Geist Mono', ui-monospace, monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); min-height: 100vh; padding: 2.5rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .header { margin-bottom: 1.75rem; }
+    .header-eyebrow { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.75rem, 3vw + 0.5rem, 2.35rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.12; margin-bottom: 0.5rem; }
+    .subtitle { font-size: 0.95rem; line-height: 1.55; color: var(--color-muted); max-width: 68ch; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    svg { width: 100%; min-width: 1160px; display: block; }
+    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 1.5rem; }
+    @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
+    .card { background: #ffffff; border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
+    .card .eyebrow { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(45,49,66,0.08); }
+    .card-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .card-dot.ink { background: var(--color-ink); }
+    .card-dot.coral { background: var(--color-accent); }
+    .card-dot.link { background: var(--color-link); }
+    .card h3 { font-size: 0.875rem; font-weight: 600; }
+    .card ul { color: var(--color-muted); font-size: 0.8125rem; line-height: 1.55; list-style: none; }
+    .card li { margin-bottom: 0.3rem; padding-left: 0.875rem; position: relative; }
+    .card li::before { content: '—'; position: absolute; left: 0; color: rgba(45,49,66,0.25); font-size: 0.75rem; }
+    .footer { margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid rgba(45,49,66,0.10); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--color-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+    @media print { body { padding: 0.5rem; } .diagram-container { overflow-x: visible; } svg { min-width: 0; } @page { size: A4 landscape; margin: 10mm; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <p class="header-eyebrow">USE CASE · 01C MODUL PESERTA DIDIK &amp; LAYANAN AI</p>
+      <h1>Use Case Detail · Pengalaman Ujian Murid, Kamera &amp; AI Assistant</h1>
+      <p class="subtitle">Alur kapabilitas penuh Peserta Didik mulai dari autentikasi OTP, cek kamera pra-ujian, pengerjaan ujian ber-WebRTC, AI Tutor soal, Chatbot+ database, hingga notifikasi real-time.</p>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1160 632" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="uc-peserta-title uc-peserta-desc">
+        <title id="uc-peserta-title">Use Case Detail Peserta Didik dan Layanan AI</title>
+        <desc id="uc-peserta-desc">Diagram use case rinci untuk peran Peserta Didik beserta integrasi WebRTC kamera, NVIDIA NIM AI, Fonnte OTP, dan Web Push.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+          <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#bf4520"/></marker>
+          <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+        </defs>
+
+        <!-- 1. Background -->
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- 2. System Boundary -->
+        <rect x="304" y="24" width="468" height="532" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.16)" stroke-width="1"/>
+        <rect x="320" y="32" width="224" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="432" y="41" fill="#5a6580" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.14em">SYSTEM · SCOPE PESERTA DIDIK</text>
+
+        <!-- 3. Connectors (zero crossings, symmetric non-overlapping vertical rails) -->
+        <!-- Left Actor (x=192, y=148..412, ports every 28px: 168, 196, 224, 252, 296, 324, 352, 380) -->
+        <!-- Top 4 go UP cleanly -->
+        <path d="M 192,168 H 212 Q 220,168 220,160 V 94 Q 220,86 228,86 H 344" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 192,196 H 228 Q 236,196 236,188 V 154 Q 236,146 244,146 H 344" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 192,224 H 244 Q 252,224 252,216 V 214 Q 252,206 260,206 H 344" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 192,252 H 264 Q 272,252 272,260 V 258 Q 272,266 280,266 H 344" fill="none" stroke="#bf4520" stroke-width="1.3" marker-end="url(#arrow-accent)"/>
+
+        <!-- Bottom 4 go DOWN cleanly -->
+        <path d="M 192,296 H 264 Q 272,296 272,304 V 318 Q 272,326 280,326 H 344" fill="none" stroke="#bf4520" stroke-width="1.3" marker-end="url(#arrow-accent)"/>
+        <path d="M 192,324 H 244 Q 252,324 252,332 V 378 Q 252,386 260,386 H 344" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 192,352 H 228 Q 236,352 236,360 V 438 Q 236,446 244,446 H 344" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+        <path d="M 192,380 H 212 Q 220,380 220,388 V 498 Q 220,506 228,506 H 344" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+        <!-- Right External Connections (UC right edge = 724 -> External left edge = 900) -->
+        <!-- UC-P1 (y=86) -> Fonnte (y=86 straight) -->
+        <line x1="724" y1="86" x2="900" y2="86" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <!-- UC-P3 (y=206) -> WebRTC (y=206 straight) -->
+        <line x1="724" y1="206" x2="900" y2="206" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <!-- UC-P5 (y=326) -> WebRTC (y=260) -->
+        <path d="M 724,326 H 804 Q 812,326 812,318 V 268 Q 812,260 820,260 H 900" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <!-- UC-P6 (y=386) -> NVIDIA NIM (y=386 straight) -->
+        <line x1="724" y1="386" x2="900" y2="386" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <!-- UC-P7 (y=446) -> NVIDIA NIM (y=420) -->
+        <path d="M 724,446 H 804 Q 812,446 812,438 V 428 Q 812,420 820,420 H 900" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <!-- UC-P8 (y=506) -> Push & WA (y=506 straight) -->
+        <line x1="724" y1="506" x2="900" y2="506" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+
+        <!-- Arrow Labels (opaque mask, >= 6px gap) -->
+        <rect x="780" y="64" width="68" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="814" y="73" fill="#2e5aa8" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">KIRIM OTP</text>
+
+        <rect x="772" y="184" width="84" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="814" y="193" fill="#2e5aa8" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">GETUSERMEDIA</text>
+
+        <rect x="776" y="364" width="76" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="814" y="373" fill="#2e5aa8" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">AI TUTOR</text>
+
+        <rect x="772" y="484" width="84" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="814" y="493" fill="#2e5aa8" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle" letter-spacing="0.06em">VAPID PUSH</text>
+
+        <!-- 4. Left Actor -->
+        <rect x="32" y="148" width="160" height="264" rx="6" fill="#f5f5f5"/>
+        <rect x="32" y="148" width="160" height="264" rx="6" fill="rgba(79,93,117,0.10)" stroke="#5a6580" stroke-width="1"/>
+        <rect x="44" y="156" width="44" height="12" rx="2" fill="transparent" stroke="rgba(90,101,128,0.45)" stroke-width="0.8"/>
+        <text x="66" y="165" fill="#5a6580" font-size="7" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">ACTOR</text>
+        <text x="112" y="274" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Peserta Didik</text>
+        <text x="112" y="292" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">role: PESERTA</text>
+        <text x="112" y="308" fill="#5a6580" font-size="8.5" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">/peserta/*</text>
+
+        <!-- 5. 8 Use Cases (x=344, w=380, h=44) -->
+        <rect x="344" y="64" width="380" height="44" rx="20" fill="#f5f5f5"/>
+        <rect x="344" y="64" width="380" height="44" rx="20" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="534" y="83" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Login Kredensial / WhatsApp OTP</text>
+        <text x="534" y="98" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">/login · /auth/whatsapp/send-otp · verify-otp</text>
+
+        <rect x="344" y="124" width="380" height="44" rx="20" fill="#f5f5f5"/>
+        <rect x="344" y="124" width="380" height="44" rx="20" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="534" y="143" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Kelola Profil Peserta &amp; Ganti Kata Sandi</text>
+        <text x="534" y="158" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">/peserta/profile · NIS · Kelas · No. WA</text>
+
+        <rect x="344" y="184" width="380" height="44" rx="20" fill="#f5f5f5"/>
+        <rect x="344" y="184" width="380" height="44" rx="20" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="534" y="203" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Cek Kamera Mandiri &amp; Pra-Ujian</text>
+        <text x="534" y="218" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">/peserta/camera-check · /peserta/exams/detail</text>
+
+        <rect x="344" y="244" width="380" height="44" rx="20" fill="#f5f5f5"/>
+        <rect x="344" y="244" width="380" height="44" rx="20" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1.2"/>
+        <text x="534" y="263" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Kerjakan Ujian (Autosave &amp; Server Timer)</text>
+        <text x="534" y="278" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">/peserta/exams/room · save-answer · finish</text>
+
+        <rect x="344" y="304" width="380" height="44" rx="20" fill="#f5f5f5"/>
+        <rect x="344" y="304" width="380" height="44" rx="20" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1.2"/>
+        <text x="534" y="323" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Streaming Dual Camera &amp; Pantau Pengawas</text>
+        <text x="534" y="338" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">camera-snapshot · proctor-camera · proctor-event</text>
+
+        <rect x="344" y="364" width="380" height="44" rx="20" fill="#f5f5f5"/>
+        <rect x="344" y="364" width="380" height="44" rx="20" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="534" y="383" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Lihat Hasil Nilai &amp; Tanya AI Tutor Soal</text>
+        <text x="534" y="398" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">/peserta/results/{id} · /api/chat/explain-question</text>
+
+        <rect x="344" y="424" width="380" height="44" rx="20" fill="#f5f5f5"/>
+        <rect x="344" y="424" width="380" height="44" rx="20" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="534" y="443" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Tanya Chatbot+ Terintegrasi Database</text>
+        <text x="534" y="458" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">/api/chat/global (scoped jadwal &amp; nilai)</text>
+
+        <rect x="344" y="484" width="380" height="44" rx="20" fill="#f5f5f5"/>
+        <rect x="344" y="484" width="380" height="44" rx="20" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="534" y="503" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Terima Notifikasi Ujian &amp; Hasil</text>
+        <text x="534" y="518" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">/notifications · Web Push Service Worker</text>
+
+        <!-- 6. Right External Actors (x=900, w=224) -->
+        <rect x="900" y="52" width="224" height="68" rx="6" fill="#f5f5f5"/>
+        <rect x="900" y="52" width="224" height="68" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <text x="1012" y="82" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Fonnte WhatsApp API</text>
+        <text x="1012" y="98" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">OTP 6-digit · 5m expiry</text>
+
+        <rect x="900" y="180" width="224" height="104" rx="6" fill="#f5f5f5"/>
+        <rect x="900" y="180" width="224" height="104" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <text x="1012" y="226" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Browser WebRTC Camera</text>
+        <text x="1012" y="244" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">Dual Cam (Wajah + Meja)</text>
+
+        <rect x="900" y="360" width="224" height="84" rx="6" fill="#f5f5f5"/>
+        <rect x="900" y="360" width="224" height="84" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <text x="1012" y="398" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">NVIDIA NIM AI API</text>
+        <text x="1012" y="416" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">Guardrail + DB Grounding</text>
+
+        <rect x="900" y="472" width="224" height="68" rx="6" fill="#f5f5f5"/>
+        <rect x="900" y="472" width="224" height="68" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <text x="1012" y="502" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', system-ui, sans-serif" text-anchor="middle">Web Push VAPID Gateway</text>
+        <text x="1012" y="518" fill="#4f5d75" font-size="9" font-family="'Geist Mono', ui-monospace, monospace" text-anchor="middle">Service Worker + Polling</text>
+
+        <!-- 7. Legend Strip -->
+        <line x1="32" y1="584" x2="1124" y2="584" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+        <text x="32" y="600" fill="#4f5d75" font-size="8" font-family="'Geist Mono', ui-monospace, monospace" letter-spacing="0.16em">LEGEND</text>
+        <rect x="32" y="612" width="14" height="10" rx="4" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <text x="54" y="620" fill="#4f5d75" font-size="9" font-family="'Geist', system-ui, sans-serif">Use Case Peserta</text>
+        <rect x="176" y="612" width="14" height="10" rx="4" fill="rgba(191,69,32,0.08)" stroke="#bf4520" stroke-width="1"/>
+        <text x="198" y="620" fill="#4f5d75" font-size="9" font-family="'Geist', system-ui, sans-serif">Fokus Ruang Ujian &amp; Kamera</text>
+        <line x1="376" y1="617" x2="400" y2="617" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#arrow-link)"/>
+        <text x="408" y="620" fill="#4f5d75" font-size="9" font-family="'Geist', system-ui, sans-serif">Integrasi API / Browser</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow">PRA-UJIAN</p>
+        <div class="card-header"><span class="card-dot ink"></span><h3>Kesiapan Perangkat</h3></div>
+        <ul>
+          <li>Peserta dapat menguji kamera mandiri di <code>/peserta/camera-check</code> atau sebelum memulai ujian.</li>
+          <li>ID kamera terpilih disimpan ke <code>sessionStorage</code> agar otomatis aktif di ruang ujian.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">SELAMA UJIAN</p>
+        <div class="card-header"><span class="card-dot coral"></span><h3>Autosave &amp; Dual Camera</h3></div>
+        <ul>
+          <li>Snapshot JPEG dari kamera wajah &amp; meja dikirim berkala ke server setiap 5 detik.</li>
+          <li>Peserta juga melihat status live kamera pengawas guru dan timer sinkronisasi server.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow">PASCA UJIAN</p>
+        <div class="card-header"><span class="card-dot link"></span><h3>AI Tutor &amp; Chatbot+</h3></div>
+        <ul>
+          <li>Fitur AI Tutor pada <code>explain-question</code> diblokir (403) selama ujian masih berstatus <code>started</code>.</li>
+          <li>Chatbot+ hanya menjawab jadwal dan hasil nilai milik siswa yang sedang login.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>U-LINE DOCUMENTATION · 01C USE CASE PESERTA &amp; AI</span>
+      <span>STANDAR DIAGRAM-DESIGN · SYSTEM FONTS OFFLINE</span>
+    </div>
+  </div>
+</body>
+</html>
+

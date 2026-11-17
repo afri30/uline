@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>U-Line · Full UML Class Diagram</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-paper: #f5f5f5;
+      --color-paper-2: #ececec;
+      --color-ink: #2d3142;
+      --color-muted: #4f5d75;
+      --color-soft: #5a6580;
+      --color-rule: rgba(45, 49, 66, 0.12);
+      --color-accent: #bf4520;
+      --color-link: #2e5aa8;
+      --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-mono: 'Geist Mono', ui-monospace, monospace;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      min-height: 100vh;
+      padding: 2.5rem 2rem;
+    }
+    .container { max-width: 1220px; margin: 0 auto; }
+    .header { margin-bottom: 1.75rem; }
+    .header-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3vw + 0.5rem, 2.35rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle { font-size: 0.95rem; line-height: 1.55; color: var(--color-muted); max-width: 72ch; }
+    .diagram-container { width: 100%; overflow-x: auto; background: #ffffff; border-radius: 8px; border: 1px solid var(--color-rule); padding: 1rem; }
+    svg { width: 100%; min-width: 1140px; display: block; }
+    .cards { display: grid; grid-template-columns: 1.15fr 1fr 0.85fr; gap: 1rem; margin-top: 1.5rem; }
+    @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
+    .card { background: #ffffff; border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
+    .card .eyebrow { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(45,49,66,0.08); }
+    .card-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .card-dot.ink { background: var(--color-ink); }
+    .card-dot.coral { background: var(--color-accent); }
+    .card-dot.link { background: var(--color-link); }
+    .card h3 { font-size: 0.875rem; font-weight: 600; }
+    .card ul { color: var(--color-muted); font-size: 0.8125rem; line-height: 1.55; list-style: none; }
+    .card li { margin-bottom: 0.35rem; padding-left: 0.875rem; position: relative; }
+    .card li::before { content: '—'; position: absolute; left: 0; color: rgba(45,49,66,0.25); font-size: 0.75rem; }
+    .footer { margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid rgba(45,49,66,0.10); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--color-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+    @media print {
+      body { padding: 0.5rem; }
+      .diagram-container { overflow-x: visible; border: none; padding: 0; }
+      svg { min-width: 0; }
+      @page { size: A4 landscape; margin: 8mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <p class="header-eyebrow">UML CLASS · 05 ARSITEKTUR BERORIENTASI OBJEK &amp; PRINSIP SOLID</p>
+      <h1>U-Line · Full UML Class Diagram (Pola MVC &amp; AI Layering)</h1>
+      <p class="subtitle">Struktur kelas objek komprehensif sistem U-Line yang memodelkan hirarki inheritance controller dan model, asosiasi domain inti ujian, komposisi persistensi jawaban, serta realisasi antarmuka AI Service berstandar SOLID.</p>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1140 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="uml-class-title uml-class-desc">
+        <title id="uml-class-title">UML Class Diagram Sistem Ujian U-Line</title>
+        <desc id="uml-class-desc">Diagram kelas UML 2.5 yang memodelkan BaseController, ExamController, AIServiceInterface, NvidiaAIService, BaseModel, ExamSession, dan Answer.</desc>
+        
+        <defs>
+          <pattern id="class-dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.8" fill="rgba(45,49,66,0.08)"/>
+          </pattern>
+          <!-- 1. Inheritance / Realization: Hollow Triangle -->
+          <marker id="uml-triangle" markerWidth="16" markerHeight="12" refX="15" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+            <polygon points="0 0, 16 6, 0 12" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+          </marker>
+          <marker id="uml-triangle-accent" markerWidth="16" markerHeight="12" refX="15" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+            <polygon points="0 0, 16 6, 0 12" fill="#ffffff" stroke="#bf4520" stroke-width="1.2"/>
+          </marker>
+          <!-- 2. Composition: Filled Diamond -->
+          <marker id="uml-diamond-filled" markerWidth="18" markerHeight="10" refX="0" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+            <polygon points="0 5, 9 0, 18 5, 9 10" fill="#2d3142"/>
+          </marker>
+          <!-- 3. Aggregation: Hollow Diamond -->
+          <marker id="uml-diamond-hollow" markerWidth="18" markerHeight="10" refX="0" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+            <polygon points="0 5, 9 0, 18 5, 9 10" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+          </marker>
+          <!-- 4. Association / Dependency: Open Arrowhead -->
+          <marker id="uml-open" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M0,0 L9,4 L0,8" fill="none" stroke="#4f5d75" stroke-width="1.2"/>
+          </marker>
+          <marker id="uml-open-accent" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+            <path d="M0,0 L9,4 L0,8" fill="none" stroke="#bf4520" stroke-width="1.3"/>
+          </marker>
+        </defs>
+
+        <!-- 1. Background -->
+        <rect width="100%" height="100%" fill="#f8fafc"/>
+        <rect width="100%" height="100%" fill="url(#class-dots)" opacity="0.65"/>
+
+        <!-- 2. Package Boundaries / Regions (Subtle Tinting) -->
+        <!-- Package Core & Controllers -->
+        <rect x="28" y="24" width="684" height="388" rx="8" fill="rgba(45,49,66,0.015)" stroke="rgba(45,49,66,0.12)" stroke-width="1" stroke-dasharray="4,4"/>
+        <rect x="36" y="30" width="168" height="14" rx="2" fill="#ececec"/>
+        <text x="120" y="40" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.10em">PACKAGE: APP\CONTROLLERS &amp; CORE</text>
+
+        <!-- Package Services & AI -->
+        <rect x="740" y="24" width="372" height="388" rx="8" fill="rgba(191,69,32,0.015)" stroke="rgba(191,69,32,0.18)" stroke-width="1" stroke-dasharray="4,4"/>
+        <rect x="748" y="30" width="154" height="14" rx="2" fill="rgba(191,69,32,0.08)"/>
+        <text x="825" y="40" fill="#bf4520" font-size="7.5" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.10em">PACKAGE: APP\SERVICES\AI</text>
+
+        <!-- Package Persistence & Domain Models -->
+        <rect x="28" y="432" width="1084" height="268" rx="8" fill="rgba(45,49,66,0.015)" stroke="rgba(45,49,66,0.12)" stroke-width="1" stroke-dasharray="4,4"/>
+        <rect x="36" y="438" width="154" height="14" rx="2" fill="#ececec"/>
+        <text x="113" y="448" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.10em">PACKAGE: APP\MODELS (PDO)</text>
+
+        <!-- 3. CONNECTORS & RELATIONSHIPS (Drawn BEFORE Boxes, Strict Orthogonal) -->
+
+        <!-- 1. ExamController EXTENDS BaseController (solid line, hollow triangle) -->
+        <line x1="220" y1="236" x2="220" y2="176" stroke="#2d3142" stroke-width="1.3" marker-end="url(#uml-triangle)"/>
+        
+        <!-- 2. ExamController DEPENDS ON AIServiceInterface (dashed line, open arrowhead, USES) -->
+        <path d="M 370,296 H 756" fill="none" stroke="#bf4520" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#uml-open-accent)"/>
+
+        <!-- 3. NvidiaAIService REALIZES AIServiceInterface (dashed line, hollow triangle) -->
+        <line x1="924" y1="236" x2="924" y2="176" stroke="#bf4520" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#uml-triangle-accent)"/>
+
+        <!-- 4. ExamSession EXTENDS BaseModel (solid line, hollow triangle) -->
+        <path d="M 370,550 H 330 Q 320,550 320,558 V 564" fill="none" stroke="#2d3142" stroke-width="1.3"/>
+        <line x1="220" y1="588" x2="220" y2="538" stroke="#2d3142" stroke-width="1.3" marker-end="url(#uml-triangle)"/>
+
+        <!-- 5. Answer EXTENDS BaseModel (solid line, hollow triangle with bridge/elbow) -->
+        <path d="M 764,574 H 560 Q 550,574 550,554 V 510 Q 550,490 540,490 H 370" fill="none" stroke="#2d3142" stroke-width="1.3" marker-end="url(#uml-triangle)"/>
+
+        <!-- 6. ExamSession COMPOSES Answer (solid line with FILLED DIAMOND at ExamSession, 1 to 0..*) -->
+        <line x1="670" y1="570" x2="764" y2="570" stroke="#2d3142" stroke-width="1.3" marker-start="url(#uml-diamond-filled)"/>
+
+        <!-- 7. ExamController MANAGES ExamSession (solid line with open arrow, 1 to 0..*) -->
+        <path d="M 270,364 V 412 Q 270,420 278,420 H 492 Q 500,420 500,428 V 468" fill="none" stroke="#4f5d75" stroke-width="1.3" marker-end="url(#uml-open)"/>
+
+        <!-- Connector Multiplicities & Labels with Opaque Paper Masks -->
+        <rect x="520" y="288" width="68" height="14" rx="2" fill="#f8fafc"/>
+        <text x="554" y="298" fill="#bf4520" font-size="7.5" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">&laquo;uses&raquo;</text>
+
+        <!-- Composition Multiplicities -->
+        <rect x="680" y="558" width="14" height="12" rx="2" fill="#f8fafc"/>
+        <text x="687" y="567" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace" font-weight="600" text-anchor="middle">1</text>
+
+        <rect x="736" y="558" width="22" height="12" rx="2" fill="#f8fafc"/>
+        <text x="747" y="567" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace" font-weight="600" text-anchor="middle">0..*</text>
+
+        <!-- Association Multiplicities -->
+        <rect x="254" y="372" width="14" height="12" rx="2" fill="#f8fafc"/>
+        <text x="261" y="381" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" font-weight="600">1</text>
+
+        <rect x="478" y="440" width="22" height="12" rx="2" fill="#f8fafc"/>
+        <text x="489" y="449" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" font-weight="600">0..*</text>
+
+        <!-- 4. UML CLASS COMPARTMENT BOXES (3 Compartments: Name, Attributes, Operations) -->
+
+        <!-- ============================================== -->
+        <!-- CLASS 1: BaseController (Core Framework)       -->
+        <!-- ============================================== -->
+        <g id="class-base-controller">
+          <rect x="70" y="58" width="300" height="106" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+          <!-- Compartment 1: Name -->
+          <rect x="70" y="58" width="300" height="34" rx="6" fill="#f1f5f9"/>
+          <rect x="70" y="86" width="300" height="6" fill="#f1f5f9"/>
+          <line x1="70" y1="92" x2="370" y2="92" stroke="rgba(45,49,66,0.18)" stroke-width="1"/>
+          <text x="220" y="74" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" text-anchor="middle">&laquo;abstract&raquo;</text>
+          <text x="220" y="86" fill="#1e293b" font-size="11.5" font-weight="600" font-style="italic" font-family="'Geist', sans-serif" text-anchor="middle">BaseController</text>
+
+          <!-- Compartment 2: Operations (Omit empty attributes) -->
+          <text x="82" y="110" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ view(viewPath: string, data: array): void</text>
+          <text x="82" y="126" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ json(payload: array, statusCode: int): void</text>
+          <text x="82" y="142" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ redirect(targetUrl: string): void</text>
+        </g>
+
+        <!-- ============================================== -->
+        <!-- CLASS 2: ExamController (Application Handler)  -->
+        <!-- ============================================== -->
+        <g id="class-exam-controller">
+          <rect x="70" y="236" width="300" height="128" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+          <!-- Compartment 1: Name -->
+          <rect x="70" y="236" width="300" height="28" rx="6" fill="#f1f5f9"/>
+          <rect x="70" y="258" width="300" height="6" fill="#f1f5f9"/>
+          <line x1="70" y1="264" x2="370" y2="264" stroke="rgba(45,49,66,0.18)" stroke-width="1"/>
+          <text x="220" y="254" fill="#1e293b" font-size="11.5" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">ExamController</text>
+
+          <!-- Compartment 2: Attributes -->
+          <text x="82" y="280" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">- sessionModel: ExamSession</text>
+          <text x="82" y="294" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">- aiService: AIServiceInterface</text>
+          <line x1="70" y1="302" x2="370" y2="302" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+
+          <!-- Compartment 3: Operations -->
+          <text x="82" y="318" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ room(sessionId: int): void</text>
+          <text x="82" y="332" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ saveAnswer(req: Request): JSON</text>
+          <text x="82" y="346" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ submitExam(sessionId: int): JSON</text>
+        </g>
+
+        <!-- ======================================================== -->
+        <!-- CLASS 3: AIServiceInterface (Contract Interface - Focal) -->
+        <!-- ======================================================== -->
+        <g id="class-ai-interface">
+          <rect x="764" y="58" width="320" height="118" rx="6" fill="rgba(191,69,32,0.05)" stroke="#bf4520" stroke-width="1.3"/>
+          <!-- Compartment 1: Name -->
+          <rect x="764" y="58" width="320" height="34" rx="6" fill="rgba(191,69,32,0.12)"/>
+          <rect x="764" y="86" width="320" height="6" fill="rgba(191,69,32,0.12)"/>
+          <line x1="764" y1="92" x2="1084" y2="92" stroke="rgba(191,69,32,0.30)" stroke-width="1"/>
+          <text x="924" y="74" fill="#bf4520" font-size="7.5" font-family="'Geist Mono', monospace" text-anchor="middle">&laquo;interface&raquo;</text>
+          <text x="924" y="86" fill="#1e293b" font-size="11.5" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">AIServiceInterface</text>
+
+          <!-- Compartment 2: Operations -->
+          <text x="776" y="110" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ chatCompletion(msgs: array, opt: array): string</text>
+          <text x="776" y="126" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ explainQuestion(qId: int, sessId: int): string</text>
+          <text x="776" y="142" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ assessRiskAnomaly(snapshot: string): int</text>
+          <text x="776" y="158" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ cleanAIResponse(rawPayload: string): string</text>
+        </g>
+
+        <!-- ============================================== -->
+        <!-- CLASS 4: NvidiaAIService (Concrete Adapter)    -->
+        <!-- ============================================== -->
+        <g id="class-nvidia-ai-service">
+          <rect x="764" y="236" width="320" height="128" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+          <!-- Compartment 1: Name -->
+          <rect x="764" y="236" width="320" height="28" rx="6" fill="#f1f5f9"/>
+          <rect x="764" y="258" width="320" height="6" fill="#f1f5f9"/>
+          <line x1="764" y1="264" x2="1084" y2="264" stroke="rgba(45,49,66,0.18)" stroke-width="1"/>
+          <text x="924" y="254" fill="#1e293b" font-size="11.5" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">NvidiaAIService</text>
+
+          <!-- Compartment 2: Attributes -->
+          <text x="776" y="280" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">- apiKey: string</text>
+          <text x="776" y="294" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">- modelEndpoint: string = "meta/llama-3.1-70b-instruct"</text>
+          <line x1="764" y1="302" x2="1084" y2="302" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+
+          <!-- Compartment 3: Operations -->
+          <text x="776" y="318" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ chatCompletion(msgs: array, opt: array): string</text>
+          <text x="776" y="332" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ explainQuestion(qId: int, sessId: int): string</text>
+          <text x="776" y="346" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ cleanAIResponse(rawPayload: string): string</text>
+        </g>
+
+        <!-- ============================================== -->
+        <!-- CLASS 5: Model (Core Active Record / PDO)      -->
+        <!-- ============================================== -->
+        <g id="class-base-model">
+          <rect x="70" y="468" width="300" height="142" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+          <!-- Compartment 1: Name -->
+          <rect x="70" y="468" width="300" height="34" rx="6" fill="#f1f5f9"/>
+          <rect x="70" y="496" width="300" height="6" fill="#f1f5f9"/>
+          <line x1="70" y1="502" x2="370" y2="502" stroke="rgba(45,49,66,0.18)" stroke-width="1"/>
+          <text x="220" y="484" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" text-anchor="middle">&laquo;abstract&raquo;</text>
+          <text x="220" y="496" fill="#1e293b" font-size="11.5" font-weight="600" font-style="italic" font-family="'Geist', sans-serif" text-anchor="middle">Model</text>
+
+          <!-- Compartment 2: Attributes -->
+          <text x="82" y="518" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace"># db: PDO</text>
+          <text x="82" y="532" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace"># table: string</text>
+          <line x1="70" y1="540" x2="370" y2="540" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+
+          <!-- Compartment 3: Operations -->
+          <text x="82" y="556" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ findById(id: int): ?array</text>
+          <text x="82" y="570" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ create(data: array): int</text>
+          <text x="82" y="584" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ update(id: int, data: array): bool</text>
+          <text x="82" y="598" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ delete(id: int): bool</text>
+        </g>
+
+        <!-- ============================================== -->
+        <!-- CLASS 6: ExamSession (Aggregate Root)          -->
+        <!-- ============================================== -->
+        <g id="class-exam-session">
+          <rect x="370" y="468" width="300" height="152" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+          <!-- Compartment 1: Name -->
+          <rect x="370" y="468" width="300" height="28" rx="6" fill="#f1f5f9"/>
+          <rect x="370" y="490" width="300" height="6" fill="#f1f5f9"/>
+          <line x1="370" y1="496" x2="670" y2="496" stroke="rgba(45,49,66,0.18)" stroke-width="1"/>
+          <text x="520" y="486" fill="#1e293b" font-size="11.5" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">ExamSession</text>
+
+          <!-- Compartment 2: Attributes -->
+          <text x="382" y="512" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ id: int</text>
+          <text x="382" y="526" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ remaining_time: int</text>
+          <text x="382" y="540" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ risk_score: int = 0</text>
+          <text x="382" y="554" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ status: string = 'in_progress'</text>
+          <line x1="370" y1="562" x2="670" y2="562" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+
+          <!-- Compartment 3: Operations -->
+          <text x="382" y="578" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ getActiveSession(userId: int, examId: int): ?array</text>
+          <text x="382" y="594" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ recordRiskAnomaly(event: string, pts: int): void</text>
+          <text x="382" y="608" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ finalizeGrading(): float</text>
+        </g>
+
+        <!-- ============================================== -->
+        <!-- CLASS 7: Answer (Composed Entity)              -->
+        <!-- ============================================== -->
+        <g id="class-answer">
+          <rect x="764" y="468" width="320" height="152" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1.2"/>
+          <!-- Compartment 1: Name -->
+          <rect x="764" y="468" width="320" height="28" rx="6" fill="#f1f5f9"/>
+          <rect x="764" y="490" width="320" height="6" fill="#f1f5f9"/>
+          <line x1="764" y1="496" x2="1084" y2="496" stroke="rgba(45,49,66,0.18)" stroke-width="1"/>
+          <text x="924" y="486" fill="#1e293b" font-size="11.5" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Answer</text>
+
+          <!-- Compartment 2: Attributes -->
+          <text x="776" y="512" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ id: int</text>
+          <text x="776" y="526" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ session_id: int &lt;&lt;FK&gt;&gt;</text>
+          <text x="776" y="540" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ question_id: int &lt;&lt;FK&gt;&gt;</text>
+          <text x="776" y="554" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ selected_answer: ?string</text>
+          <line x1="764" y1="562" x2="1084" y2="562" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+
+          <!-- Compartment 3: Operations -->
+          <text x="776" y="578" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ saveOrUpdate(sessId: int, qId: int, ans: string): int</text>
+          <text x="776" y="594" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ evaluateCorrectness(correctKey: string): bool</text>
+          <text x="776" y="608" fill="#2d3142" font-size="8" font-family="'Geist Mono', monospace">+ getAnswersBySession(sessId: int): array</text>
+        </g>
+
+        <!-- 5. Complete UML Relationship Legend Strip at Bottom -->
+        <line x1="28" y1="714" x2="1112" y2="714" stroke="rgba(45,49,66,0.12)" stroke-width="0.8"/>
+        <text x="44" y="738" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.14em">LEGENDA RELASI UML</text>
+
+        <!-- Inheritance -->
+        <line x1="170" y1="734" x2="200" y2="734" stroke="#2d3142" stroke-width="1.3" marker-end="url(#uml-triangle)"/>
+        <text x="210" y="738" fill="#4f5d75" font-size="8" font-family="'Geist', sans-serif">Inheritance (extends)</text>
+
+        <!-- Realization -->
+        <line x1="330" y1="734" x2="360" y2="734" stroke="#bf4520" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#uml-triangle-accent)"/>
+        <text x="370" y="738" fill="#4f5d75" font-size="8" font-family="'Geist', sans-serif">Realization (implements)</text>
+
+        <!-- Composition -->
+        <line x1="510" y1="734" x2="540" y2="734" stroke="#2d3142" stroke-width="1.3" marker-start="url(#uml-diamond-filled)"/>
+        <text x="550" y="738" fill="#4f5d75" font-size="8" font-family="'Geist', sans-serif">Composition (owns/cascades)</text>
+
+        <!-- Dependency -->
+        <line x1="720" y1="734" x2="750" y2="734" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#uml-open)"/>
+        <text x="760" y="738" fill="#4f5d75" font-size="8" font-family="'Geist', sans-serif">Dependency (uses)</text>
+
+        <!-- Association -->
+        <line x1="880" y1="734" x2="910" y2="734" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#uml-open)"/>
+        <text x="920" y="738" fill="#4f5d75" font-size="8" font-family="'Geist', sans-serif">Association (multiplicity)</text>
+      </svg>
+    </div>
+
+    <!-- 6. Varied Information Summary Cards -->
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow">KEPATUHAN PRINSIP SOLID</p>
+        <div class="card-header">
+          <div class="card-dot coral"></div>
+          <h3>DIP &amp; OCP pada Lapisan AI Service</h3>
+        </div>
+        <ul>
+          <li><strong>Dependency Inversion (DIP):</strong> <code style="font-family:var(--font-mono)">ExamController</code> hanya bergantung pada abstraksi antarmuka <code style="font-family:var(--font-mono)">AIServiceInterface</code>, bukan implementasi konkrit.</li>
+          <li><strong>Open/Closed (OCP):</strong> Penambahan provider baru (misal Groq / OpenAI) dilakukan dengan membuat adapter baru tanpa memodifikasi kode controller.</li>
+          <li><strong>Single Responsibility (SRP):</strong> Controller hanya mengelola dispatch HTTP, sedangkan kalkulasi persistensi didelegasikan ke Model.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <p class="eyebrow">DOMAIN DRIVEN PERSISTENCE</p>
+        <div class="card-header">
+          <div class="card-dot link"></div>
+          <h3>Agregasi ExamSession &amp; Answer</h3>
+        </div>
+        <ul>
+          <li><strong>Composition Lifecycle:</strong> Objek <code style="font-family:var(--font-mono)">Answer</code> memiliki relasi kepemilikan ketat (*Composition*) terhadap <code style="font-family:var(--font-mono)">ExamSession</code>; jika sesi dihapus, jawaban terhapus cascade.</li>
+          <li><strong>Encapsulated Risk Scoring:</strong> Pembaruan skor risiko kecurangan dihitung secara internal di dalam method sesi untuk mencegah manipulasi eksternal.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <p class="eyebrow">STANDAR KODE PSR-4</p>
+        <div class="card-header">
+          <div class="card-dot ink"></div>
+          <h3>Modularitas Paket Berstandar OOP</h3>
+        </div>
+        <ul>
+          <li>Pemisahan jelas antara paket <code style="font-family:var(--font-mono)">App\Core</code>, <code style="font-family:var(--font-mono)">App\Controllers</code>, <code style="font-family:var(--font-mono)">App\Models</code>, dan <code style="font-family:var(--font-mono)">App\Services</code>.</li>
+          <li>Keterikatan (*coupling*) rendah dan keterpaduan (*cohesion*) tinggi memenuhi standar OBE Skor 4.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>DOKUMEN UML CLASS DIAGRAM RESMI · STANDAR OBE SKOR 4</span>
+      <span>U-LINE CBT &amp; AI PROCTORING PLATFORM · STMIK IKMI CIREBON</span>
+    </div>
+  </div>
+</body>
+</html>
