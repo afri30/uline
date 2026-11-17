@@ -1,12 +1,12 @@
 # U-Line: AI Online Examination & Dual-Camera Proctoring System
 
+[![CI/CD Pipeline](https://github.com/afri30/uline/actions/workflows/ci.yml/badge.svg)](https://github.com/afri30/uline/actions)
 [![PHP Version](https://img.shields.io/badge/PHP-8.1%20%7C%208.2-777BB4?style=flat-square&logo=php&logoColor=white)](https://www.php.net/)
 [![Database](https://img.shields.io/badge/MySQL-8.0%20(19%20Tables)-4479A1?style=flat-square&logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Frontend](https://img.shields.io/badge/UI-Bootstrap%205.3-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![Streaming](https://img.shields.io/badge/Media-WebRTC%20Dual%20Camera-333333?style=flat-square&logo=webrtc&logoColor=white)](https://webrtc.org/)
 [![AI Services](https://img.shields.io/badge/AI%20Inference-NVIDIA%20NIM%20%7C%20Llama--3.1--70B-76B900?style=flat-square&logo=nvidia&logoColor=white)](https://build.nvidia.com/)
 [![Notification Gateway](https://img.shields.io/badge/Gateway-Fonnte%20WhatsApp%20v2-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://fonnte.com/)
-[![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions%20Passing-2088FF?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/afri30/uline/actions)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
 > **U-Line** adalah sistem ujian online (*Computer-Based Testing* / CBT) generasi mutakhir yang dirancang dengan arsitektur murni **PHP Native Model-View-Controller (MVC)**, terintegrasi dengan **WebRTC Dual-Camera Video Streaming**, **AI Anomaly Risk Scoring Engine**, **Multi-LLM Subject Tutor**, **Factual Database Chatbot Grounding**, dan **Fonnte WhatsApp 2FA Gateway**.
@@ -15,15 +15,36 @@
 
 ## 📌 Identitas Proyek Tugas Akhir / UAS
 
-Dokumen dan kode sumber ini disusun untuk memenuhi persyaratan nilai tugas akhir / UAS mata kuliah **Rekayasa Perangkat Lunak (RPL)**:
+Dokumen dan kode sumber ini disusun untuk memenuhi persyaratan nilai tugas akhir / UAS mata kuliah **Rekayasa Perangkat Lunak (TIKB2503021)**:
 
-* **Nama Mahasiswa**: **Rian Afriyansyah**
-* **NIM**: **41257154**
-* **Mata Kuliah / Kode**: Rekayasa Perangkat Lunak (TIKB2503021) — 4 SKS
-* **Program Studi**: S1 Teknik Informatika
-* **Perguruan Tinggi**: **STMIK IKMI Cirebon**
-* **Dosen Pengampu**: **Yudhistira Arie Wijaya, M.Kom., CDS.**
-* **Tautan Repository GitHub**: [https://github.com/afri30/uline.git](https://github.com/afri30/uline.git)
+* **Mata Kuliah:** Rekayasa Perangkat Lunak (TIKB2503021)
+* **Dosen Pengampu:** **Yudhistira Arie Wijaya, M.Kom., CDS.**
+* **Program Studi:** S1 Teknik Informatika
+* **Perguruan Tinggi:** **STMIK IKMI Cirebon**
+* **Tautan Repository GitHub:** [https://github.com/afri30/uline](https://github.com/afri30/uline)
+
+### 👥 Tim Pengembang (Kelompok):
+| No | Nama Mahasiswa | NIM | Peran / Kontribusi |
+| :---: | :--- | :---: | :--- |
+| 1 | **Rian Afriyansyah** *(Ketua)* | **41257154** | Full-Stack Architecture, AI Proctoring & Dual-Cam WebRTC |
+| 2 | **Rijal** | **41257155** | Database Modeling & Core Academic Module |
+| 3 | **Salsa Nabila** | **41257158** | UI/UX Design & Frontend CBT Exam Engine |
+| 4 | **Siti Masripatul Hawa** | **41257160** | WhatsApp Gateway & Notification Engine |
+| 5 | **Dede Kuswara** | **41257170** | Teacher Monitoring Dashboard & Result Analytics |
+| 6 | **Khaerul Umam** | **41257172** | Quality Assurance, Unit Testing & CI/CD Pipeline |
+
+---
+
+## 🎥 Tautan Video Dokumentasi Proyek
+
+Dokumentasi tahapan pengembangan dan demonstrasi fungsionalitas sistem U-Line dapat disaksikan melalui tautan video berikut:
+
+* 🎬 **Video Progres 1 (Analisis & Perancangan Arsitektur):**  
+  [https://drive.google.com/file/d/1doCFdXaX40lYzF8CMHNhovWrh9YQZ9ze/view?usp=sharing](https://drive.google.com/file/d/1doCFdXaX40lYzF8CMHNhovWrh9YQZ9ze/view?usp=sharing)
+* 🎬 **Video Progres 2 (Implementasi MVC & Fitur Utama CBT):**  
+  [https://drive.google.com/file/d/1KGW-T64dwXpaQnoA2pHwY_ltAicsn87d/view?usp=sharing](https://drive.google.com/file/d/1KGW-T64dwXpaQnoA2pHwY_ltAicsn87d/view?usp=sharing)
+* 🎬 **Video Final Demo (Demo Aplikasi, Proctoring & CI/CD Pipeline):**  
+  [https://drive.google.com/file/d/19UwugOv0d1O1NjXbeTjslkjumZGmna7C/view?usp=sharing](https://drive.google.com/file/d/19UwugOv0d1O1NjXbeTjslkjumZGmna7C/view?usp=sharing)
 
 ---
 
@@ -203,7 +224,7 @@ Sistem U-Line menggunakan basis data `uline_db` yang terdiri dari 19 tabel relas
 
 ---
 
-## 💻 Panduan Instalasi & Menjalankan secara Lokal
+## ⚙️ Petunjuk Instalasi Aplikasi (Setup Instructions)
 
 Ikuti langkah-langkah mudah di bawah ini untuk menjalankan sistem U-Line di komputer lokal (Windows / XAMPP):
 
@@ -214,7 +235,7 @@ Ikuti langkah-langkah mudah di bawah ini untuk menjalankan sistem U-Line di komp
 * **Git**: Terinstal di perangkat Anda.
 
 ### 2. Kloning Repository
-Buka terminal (Git Bash, Command Prompt, atau PowerShell), lalu arahkan ke folder `htdocs`:
+Buka terminal (Git Bash, Command Prompt, atau PowerShell), lalu arahkan ke direktori web server Anda (contoh `htdocs`):
 ```bash
 cd C:\xampp\htdocs
 git clone https://github.com/afri30/uline.git
@@ -222,11 +243,11 @@ cd uline
 ```
 
 ### 3. Pembuatan & Impor Basis Data
-1. Jalankan layanan **Apache** dan **MySQL** pada panel XAMPP Control Panel.
+1. Jalankan layanan **Apache** dan **MySQL** pada XAMPP Control Panel.
 2. Buka peramban dan akses **phpMyAdmin** di `http://localhost/phpmyadmin`.
 3. Buat basis data baru bernama: `uline_db` (dengan collation `utf8mb4_unicode_ci`).
 4. Klik tab **Import**, pilih berkas `database/schema.sql`, lalu klik **Go**.
-5. *(Opsional)* Impor juga berkas `database/seeders.sql` untuk mendapatkan akun pengujian awal.
+5. Impor juga berkas `database/seeders.sql` untuk mendapatkan data pengguna awal dan contoh ujian.
 
 ### 4. Konfigurasi Environment (`.env`)
 Salin file `.env.example` menjadi `.env`:
@@ -349,4 +370,4 @@ Result: SUCCESS (100% Tests Passed - Ready for CI/CD Deployment)
 ## 📜 Lisensi & Pengesahan
 
 Proyek perangkat lunak ini dilisensikan di bawah lisensi terbuka [MIT License](LICENSE).  
-Hak cipta © 2026 **Rian Afriyansyah (NIM: 41256154)** — Program Studi S1 Teknik Informatika, **STMIK IKMI Cirebon**.
+Hak cipta © 2026 **Tim Pengembang U-Line** — Program Studi S1 Teknik Informatika, **STMIK IKMI Cirebon**.
